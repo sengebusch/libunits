@@ -1,0 +1,44 @@
+On most systems it should be save to do:
+
+  ./configure
+  make
+
+
+The installation has to be done as root:
+(the standard paths are /usr/local/lib for the shared library,
+/usr/local/bin for the utility programs and /usr/local/share/libunits
+for the database files. Use ./configure to change this, if needed)
+
+  make install
+
+
+The compilation has beed testet on SuSE-9.3 up to Open SuSE-13.2.
+
+To compile the system specific untis database image file use as root:
+
+  make images
+
+
+The library might also be used without compiling the database, but
+then the databased is parsed every time it is initialized.
+As this can take a long time, the use of the compiled image file
+is recommended.
+
+
+For some easy examples take a look into the examples folder:
+
+  cd examples
+  less units-api-demo.c
+  ./units-api-demo
+
+
+HINT:
+The database includes currencies.
+You can subscribe for daily currency updates at http://www.xe.com
+xe.com will send you daily emails with currency exchange rates.
+If you want to use the perl script to convert this emails to
+the currency database, you will need the "links-2.1" package. 
+A copy is includes in the directory "needed_3rd_party_packages". 
+Please follow the installation instructions in the package.
+
+The service from xe.com is free of charge for private use only.

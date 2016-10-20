@@ -1,0 +1,117 @@
+This library provides the posibility of calculation with units in a standard c-program.
+
+
+Take a look into the ChangeLog and INSTALL files for more information.
+
+
+
+The database inclued all SI bases and some additional pseudo bases:
+
+
+	The currently used bases are:
+        + SI bases are:
+          - mass: 				kg	(kilo grams)
+  	  - length: 				m	(meter)
+	  - time:				s	(second)
+	  - current:				A	(Ampere)
+	  - temperatur:				K	(Kelvin)
+	  - lightforce:				cd	(candela)
+	  - amount of substance, quanity:	mol	(Mol)	
+
+        + The used SI certified pseudo bases are:
+          - flat angle:				rad	(radian)
+	  - solid angle:			sr	(steradiant)
+
+        + The included non SI certified pseudo bases are:
+	  - storage (computer)			bit	(bit)
+	  - currency				EUR	(Euro)
+	  - ratio				:1	(to one)
+	  - logarythmic ratio, 10*lg		dBm	(deci Bel)
+	  - logarythmic ratio, 20*lg		dBu	(deci Bel)
+	  - pixel number			pix	(pixel)
+
+
+For a simple user interface, it provides an api with the following commands:
+
+
+  	  int u_open (void)
+		initialize the database and the the global pointer
+        	MUST be used before any other function of the library is
+	        called!
+
+ 	  u_close (void)	
+		detach from the database
+
+	  struct U_VALUE u_add (struct U_VALUE value1, struct U_VALUE value2)
+		= value1 + value2
+
+	  struct U_VALUE u_sub (struct U_VALUE value1, struct U_VALUE value2)
+ 		= value1 - value2
+
+	  struct U_VALUE u_mult (struct U_VALUE value1, struct U_VALUE value2)
+		= value1 * value2
+
+	  struct U_VALUE u_div (struct U_VALUE value1, struct U_VALUE value2)
+		= value1 / value2
+
+	  struct U_VALUE u_pow (struct U_VALUE value1, struct U_VALUE value2)
+		= pow (value1, value2)
+
+	  struct U_VALUE u_log (struct U_VALUE value1, struct U_VALUE value2)
+		= log (value1) / log (value2)
+
+	  struct U_VALUE u_sin (struct U_VALUE value1)
+		= sin (value1)
+
+	  struct U_VALUE u_cos (struct U_VALUE value1)
+		= cos (value1)
+
+	  struct U_VALUE u_tan (struct U_VALUE value1)
+		= sin (value1) / cos (value1)
+
+	  struct U_VALUE u_abs (struct U_VALUE value1)
+                calculate the complex absolute value 
+		without changing the unit
+
+	  struct U_VALUE u_cpy (struct U_VALUE *dest, struct U_VALUE source)
+		copy "source" to "dest"
+
+	  struct U_VALUE u_conv (struct U_VALUE dest, const char *unit)
+		convert "dest" to the unit "unit". 
+	        On error the status is set to  UNIT_ERR_not_same_dimension
+
+	  struct U_VALUE u_atou (const char *source);
+        	convert a string like "1.5_m^2" to U_VALUE
+
+	  struct U_VALUE u_fatou (const long double source, const char *unit)
+        	add a unit to a floating point variable
+
+	  struct U_VALUE u_ftou (const long double source)
+        	convert a floating point to a dimensionless U_VALUE
+
+	  double u_utofa (struct U_VALUE value, char *dest)
+        	convert a U_VALUE to a floationg point and a string
+
+	  double u_utof (struct U_VALUE value, const char *unit);
+        	convert a U_VALUE to a floationg point with the unit "unit"
+	        On error the status is set to  UNIT_ERR_not_same_dimension
+
+	  int u_sprintf (char *dest, const char *format, struct U_VALUE value)
+        	print the value in a string.
+	        The format must include a "%f", "%g" or "%e" AND a "%s", e.g.
+	        u_sprintf (dest, "the result is %9.3f %s\n", value);
+
+	  int u_printf (const char *format, struct U_VALUE value)
+        	like u_sprintf on stdout
+
+	  int u_error (char *dest, struct U_VALUE value)
+        	checks the value for error.
+                returns a value > 0, if an error was recognized
+		if *dest is not NULL, a clear text description of the error
+                is given
+
+
+
+
+
+
