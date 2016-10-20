@@ -1,8 +1,9 @@
 This library provides the posibility of calculation with units in a standard c-program.
 
+For a small calculator using this feature, take a look to the PRPN project:
+https://github.com/sengebusch/prpn
 
-Take a look into the ChangeLog and INSTALL files for more information.
-
+Also take a look into the ChangeLog and INSTALL files for more information.
 
 
 The database inclued all SI bases and some additional pseudo bases:
